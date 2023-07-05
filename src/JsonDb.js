@@ -104,6 +104,23 @@ class JsonDb {
 
     return true;
   }
+
+  /**
+   *
+   * @param {String} id - unique string
+   * @returns {Object} Object if found, false if object not in db
+   */
+  findById(id) {
+    const index = this.data.findIndex((e) => {
+      return e[this.id] === id;
+    });
+
+    if (index == -1) {
+      return false;
+    }
+
+    return this.data[index];
+  }
 }
 
 module.exports = JsonDb;

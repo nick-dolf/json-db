@@ -40,6 +40,14 @@ describe("JsonDB('sample')", () => {
     expect(db.add(duplicate)).toBe(false)
   })
 
+  test("find by id, in db", () => {
+    expect(db.findById("tree")).toBe(valid1)
+  })
+
+  test("find by id, not in db", () => {
+    expect(db.findById("drain")).toBe(false)
+  })
+
   test("check contents", () => {
     expect(db.data).toEqual([valid2, valid1])
   })
@@ -96,6 +104,7 @@ describe("JsonDB('sampleTwo'), slug, json_db_storage_two", () => {
   test("update valid object not in db", () => {
     expect(dbTwo.update(validTwo2)).toBe(false)
   })
+
 
   test("check contents", () => {
     expect(dbTwo.data).toEqual([{slug:"plants", name:"qurit"},{slug: "post", name:"fred"}])
