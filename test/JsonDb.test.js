@@ -51,6 +51,7 @@ describe("JsonDB('sampleTwo'), slug, json_db_storage_two", () => {
   const validTwo2 = {slug:"rose", name:"Loppe"}
   const invalidTwo = {id:"pla", name:"Twille"}
   const duplicateTwo = {slug: "tree", name:"qurit"}
+  const updateTwo = {slug: "plants", name:"qurit"}
 
   test("filePath", () => {
     expect(dbTwo.filePath).toBe(path.join(process.cwd(),"json_db_storage_two/sampleTwo.json"));
@@ -82,5 +83,21 @@ describe("JsonDB('sampleTwo'), slug, json_db_storage_two", () => {
   
   test("delete valid object not in db", () => {
     expect(dbTwo.delete(validTwo2)).toBe(false)
+  })
+  
+  test("update valid object ", () => {
+    expect(dbTwo.update(updateTwo)).toBe(true)
+  })
+  
+  test("update invalid object", () => {
+    expect(() => dbTwo.update(invalidTwo)).toThrow()
+  })
+
+  test("update valid object not in db", () => {
+    expect(dbTwo.update(validTwo2)).toBe(false)
+  })
+
+  test("check contents", () => {
+    expect(dbTwo.data).toEqual([{slug:"plants", name:"qurit"},{slug: "post", name:"fred"}])
   })
 })

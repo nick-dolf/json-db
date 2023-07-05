@@ -29,7 +29,7 @@ class JsonDb {
 
   /**
    *
-   * @param {Object} object - add an object, must have an id
+   * @param {Object} object - add an object, must have matching id parameter
    * @returns {Boolean} True if object added, false if object has duplicate id
    */
   add(object) {
@@ -55,8 +55,8 @@ class JsonDb {
 
   /**
    *
-   * @param {Object} object - delete an object, must have an id
-   * @returns {Boolean} True if object deleted, false if object did not exist
+   * @param {Object} object - delete an object, must have matching id parameter
+   * @returns {Boolean} True if object deleted, false if object not in db
    */
   delete(object) {
     if (!(this.id in object)) {
@@ -72,6 +72,32 @@ class JsonDb {
     }
 
     this.data.splice(index, 1);
+
+    const pretty = JSON.stringify(this.data, null, 2);
+    fs.writeFileSync(this.filePath, pretty);
+
+    return true;
+  }
+
+  /**
+   *
+   * @param {Object} object - update an object, must have matching id parameter
+   * @returns {Boolean} True if object updated, false if object not in db
+   */
+  update(object) {
+    if (!(this.id in object)) {
+      throw new Error("Object missing valid id");
+    }
+
+    const index = this.data.findIndex((e) => {
+      return e[this.id] === object[this.id];
+    });
+
+    if (index == -1) {
+      return false;
+    }
+
+    this.data[index] = object;
 
     const pretty = JSON.stringify(this.data, null, 2);
     fs.writeFileSync(this.filePath, pretty);
