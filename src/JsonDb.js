@@ -81,6 +81,28 @@ class JsonDb {
 
   /**
    *
+   * @param {String} id - unique string
+   * @returns {Boolean} True if object deleted, false if object not in db
+   */
+  deleteById(id) {
+    const index = this.data.findIndex((e) => {
+      return e[this.id] === id;
+    });
+
+    if (index == -1) {
+      return false;
+    }
+
+    this.data.splice(index, 1);
+
+    const pretty = JSON.stringify(this.data, null, 2);
+    fs.writeFileSync(this.filePath, pretty);
+
+    return true;
+  }
+
+  /**
+   *
    * @param {Object} object - update an object, must have matching id parameter
    * @returns {Boolean} True if object updated, false if object not in db
    */
