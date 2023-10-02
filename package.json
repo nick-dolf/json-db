@@ -1,6 +1,6 @@
 {
   "name": "puff-cheeks",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A json database that stores objects in an array.",
   "main": "puff-cheeks",
   "jest": {

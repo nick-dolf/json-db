@@ -233,7 +233,9 @@ class PuffCheeks {
     }
 
     if (result) {
-      this.data = newData;
+      for (let i = 0; i < this.data.length; i++) {
+        this.data[i] = newData[i];
+      }
 
       this.#save();
     }

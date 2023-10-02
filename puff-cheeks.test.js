@@ -32,6 +32,7 @@ describe("PuffCheeks('sample')", () => {
   const valid3 = { type: "door", name: "jason" };
   const invalid = { door: 40, name: "john" };
   const duplicate = { type: "tree", name: "flurgl" };
+  const data = db.data;
 
   test("filePath", () => {
     expect(db.filePath).toBe("puff_cheeks_storage/sample.json");
@@ -49,29 +50,30 @@ describe("PuffCheeks('sample')", () => {
     expect(db.add(valid2)).toBe(true);
   });
 
+  test("sort by valid key and check contents", () => {
+    expect(db.sortByKey(["tree", "post"])).toBe(true)
+    expect(data).toEqual([valid1, valid2]);
+  });
+
   test("add third valid object", () => {
     expect(db.add(valid3)).toBe(true);
   });
 
   test("check contents", () => {
-    expect(db.data).toEqual([valid3, valid2, valid1]);
-  });
-
-  test("sort by valid key and check contents", () => {
-    expect(db.sortByKey(["tree", "post", "door"])).toBe(true)
-    expect(db.data).toEqual([valid1, valid2, valid3]);
+    expect(data).toEqual([valid3, valid1, valid2]);
   });
 
   test("sort with missing keys and check contents", () => {
     expect(db.sortByKey(["door"])).toBe(false)
-    expect(db.data).toEqual([valid1, valid2, valid3]);
+    expect(data).toEqual([valid3, valid1, valid2]);
   });
 
   test("sort with invalid keys and check contents", () => {
     expect(db.sortByKey(["door", "race", "tree"])).toBe(false)
-    expect(db.data).toEqual([valid1, valid2, valid3]);
+    expect(data).toEqual([valid3, valid1, valid2]);
   });
 
+  
   test("add invalid object", () => {
     expect(() => db.add(invalid)).toThrow("Object missing valid id");
   });
@@ -108,7 +110,7 @@ describe("PuffCheeks('sample')", () => {
   });
 
   test("check contents", () => {
-    expect(db.data).toEqual([valid1, valid2]);
+    expect(data).toEqual([valid1, valid2]);
   });
 
   test("load and check data", () => {
