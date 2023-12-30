@@ -3,6 +3,9 @@
   "version": "1.0.1",
   "description": "A json database that stores objects in an array.",
   "main": "puff-cheeks",
+  "files": [
+    "puff-cheeks.js"
+  ],
   "jest": {
     "watchPathIgnorePatterns": [
       "<rootDir>/puff_cheeks_storage",
@@ -11,11 +14,12 @@
   },
   "scripts": {
     "test": "jest --coverage",
-    "watch": "jest --watch .js --coverage"
+    "watch": "jest --watch .js --coverage",
+    "docs": "jsdoc2md --template README.hbs --files puff-cheeks.js > README.md"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nick-dolf/json-db.git"
+    "url": "git+https://github.com/nick-dolf/puff-cheeks-storage.git"
   },
   "keywords": [
     "Json",
@@ -26,9 +30,9 @@
   "author": "Nick Dolf",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/nick-dolf/json-db/issues"
+    "url": "https://github.com/nick-dolf/puff-cheeks-storage/issues"
   },
-  "homepage": "https://github.com/nick-dolf/json-db#readme",
+  "homepage": "https://github.com/nick-dolf/puff-cheeks-storage#readme",
   "devDependencies": {
     "jest": "^29.6.0"
   }

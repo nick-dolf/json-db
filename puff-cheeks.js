@@ -59,7 +59,7 @@ class PuffCheeks {
    */
   add(object) {
     if (!(this.key in object)) {
-      throw new Error("Object missing valid id");
+      throw new Error("Object missing valid key");
     }
 
     const result = this.data.some((e) => {
@@ -172,7 +172,7 @@ class PuffCheeks {
 
   /**
    * Finds object by key
-   * @param {String} id - unique string
+   * @param {String} key - unique string
    * @returns {Object|Boolean} Object if found, false if object not in db
    */
   findByKey(key) {
@@ -206,7 +206,7 @@ class PuffCheeks {
 
   /**
    * Sorts the Data array using an ordered array of keys
-   * @param {Array} id - Array of keys
+   * @param {Array} keys - Array of keys
    * @returns {Boolean} - true if sorted, false if failed
    */
   sortByKey(array) {
