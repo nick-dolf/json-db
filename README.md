@@ -3,9 +3,9 @@
 Puff Cheeks is local Json database. Objects are stored in an array with a unique key and id.
 
 ```js
-const PuffCheeks = require("puff-cheeks")
+const PuffCheeksStorage = require("@puff-cheeks/storage")
 
-const chipmunks = new PuffCheeks("chipmunk", "name")
+const chipmunks = new PuffCheeksStorage("chipmunk", "name")
 ```
 
 <a name="PuffCheeks"></a>
@@ -23,6 +23,7 @@ const chipmunks = new PuffCheeks("chipmunk", "name")
     * [.findByKey(key)](#PuffCheeks+findByKey) ⇒ <code>Object</code> \| <code>Boolean</code>
     * [.findById(id)](#PuffCheeks+findById) ⇒ <code>Object</code>
     * [.sortByKey(keys)](#PuffCheeks+sortByKey) ⇒ <code>Boolean</code>
+    * [.sortById(ids)](#PuffCheeks+sortById) ⇒ <code>Boolean</code>
 
 <a name="new_PuffCheeks_new"></a>
 
@@ -131,6 +132,18 @@ Sorts the Data array using an ordered array of keys
 | Param | Type | Description |
 | --- | --- | --- |
 | keys | <code>Array</code> | Array of keys |
+
+<a name="PuffCheeks+sortById"></a>
+
+### puffCheeks.sortById(ids) ⇒ <code>Boolean</code>
+Sorts the Data array using an ordered array of ids
+
+**Kind**: instance method of [<code>PuffCheeks</code>](#PuffCheeks)  
+**Returns**: <code>Boolean</code> - - true if sorted, false if failed  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| ids | <code>Array</code> | Array of ids |
 
 
 * * *

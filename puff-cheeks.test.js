@@ -75,7 +75,7 @@ describe("PuffCheeks('sample')", () => {
 
   
   test("add invalid object", () => {
-    expect(() => db.add(invalid)).toThrow("Object missing valid id");
+    expect(() => db.add(invalid)).toThrow("Object missing valid key");
   });
 
   test("add duplicate id object", () => {
@@ -122,6 +122,8 @@ describe("PuffCheeks('sample')", () => {
 
 describe("PuffCheeks('sampleTwo'), slug, json_db_storage", () => {
   const dbTwo = new PuffCheeks("sampleTwo.json", "slug", "json_db_storage");
+  const savedOne = {  "slug": "tree", "name": "flurgl", "id": "f79614dc-5c89-40da-9e93-3da7189bc24a" };
+  const savedTwo = { "slug": "post", "name": "fred", "id": "36632646-eab2-4987-9056-5997dbcda9a7" };
   const validTwo = { slug: "plants", name: "Grappt" };
   const validTwo2 = { slug: "rose", name: "Loppe" };
   const invalidTwo = { id: "pla", name: "Twille" };
@@ -136,12 +138,27 @@ describe("PuffCheeks('sampleTwo'), slug, json_db_storage", () => {
     expect(dbTwo.key).toBe("slug");
   });
 
+  test("sort with missing id and check contents", () => {
+    expect(dbTwo.sortById(["36632646-eab2-4987-9056-5997dbcda9a7"])).toBe(false)
+    expect(dbTwo.data).toEqual([savedOne, savedTwo]);
+  });
+
+  test("sort with incorrect id and check contents", () => {
+    expect(dbTwo.sortById(["wrong", "bad"])).toBe(false)
+    expect(dbTwo.data).toEqual([savedOne, savedTwo]);
+  });
+
+  test("sort by valid id and check contents", () => {
+    expect(dbTwo.sortById(["36632646-eab2-4987-9056-5997dbcda9a7", "f79614dc-5c89-40da-9e93-3da7189bc24a"])).toBe(true)
+    expect(dbTwo.data).toEqual([savedTwo, savedOne]);
+  });
+
   test("add valid object", () => {
     expect(dbTwo.add(validTwo)).toBe(true);
   });
 
   test("add invalid object", () => {
-    expect(() => dbTwo.add(invalidTwo)).toThrow("Object missing valid id");
+    expect(() => dbTwo.add(invalidTwo)).toThrow("Object missing valid key");
   });
 
   test("add duplicate object", () => {

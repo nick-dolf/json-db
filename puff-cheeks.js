@@ -241,6 +241,46 @@ class PuffCheeks {
     }
     return result;
   }
+
+  /**
+   * Sorts the Data array using an ordered array of ids
+   * @param {Array} ids - Array of ids
+   * @returns {Boolean} - true if sorted, false if failed
+   */
+  sortById(array) {
+    let newData = [];
+
+
+    if (this.data.length != array.length) {
+      return false;
+    }
+    
+    let result;
+    for (let i = 0; i < array.length; i++) {
+      result = false;
+      for (let j = 0; j < this.data.length; j++) {
+        console.log(this.data[j].id)
+        if (array[i] === this.data[j].id) {
+          newData.push(this.data[j]);
+          result = true;
+          break;
+        }
+      }
+      
+      if (!result) {
+        break;
+      }
+    }
+    
+    if (result) {
+      for (let i = 0; i < this.data.length; i++) {
+        this.data[i] = newData[i];
+      }
+
+      this.#save();
+    }
+    return result;
+  }
 }
 
 module.exports = PuffCheeks;
